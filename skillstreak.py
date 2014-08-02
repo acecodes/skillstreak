@@ -1,6 +1,6 @@
 import os
 import time
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 year = time.strftime("%Y")
 title = 'Skill Streak'
@@ -19,7 +19,8 @@ def index():
 # User view
 @app.route('/user/<name>')
 def user(name):
-	return '<h1>Hello, {name}!</h1>'.format(name=name)
+	agent = request.headers.get('User-Agent')
+	return '<h1>Hello, {name}!</h1>\nYou are using {agent}'.format(name=name, agent=agent)
 
 if __name__ == '__main__':
 	app.run(debug=True)
