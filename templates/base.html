@@ -31,11 +31,12 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
-    <div class="page-header">
-        <h1>Hello, {{ name }}!</h1>
-    </div>
+{% block page_content %}
+{% endblock %}
 </div>
+
 {% endblock %}
 
 {% import "bootstrap/google.html" as google %}
