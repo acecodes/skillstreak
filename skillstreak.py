@@ -24,7 +24,7 @@ def index():
 @app.route('/user/<name>')
 def user(name):
 	agent = request.headers.get('User-Agent')
-	return '<h1>Hello, {name}!</h1>\nYou are using {agent}'.format(name=name, agent=agent)
+	return render_template('user.html', agent=agent, name=name)
 
 @app.errorhandler(404)
 def page_not_found(e):
