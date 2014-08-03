@@ -1,11 +1,13 @@
 import os
 import time
 from flask import Flask, render_template, request
+from flask_bootstrap import Bootstrap
 
 year = time.strftime("%Y")
 title = 'Skill Streak'
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 @app.context_processor
 def basics():
