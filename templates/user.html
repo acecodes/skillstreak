@@ -8,7 +8,10 @@
     </div>
 
     <div>
-    <p>You are currently using {{ agent }}</p>
+    <h3>User Agent:</h3>
+    <p>{{ agent }}</p>
+    <h3>Local Time:</h3>
+    <p>{{ moment(current_time).format('LLLL') }}</p>
     </div>
 
 

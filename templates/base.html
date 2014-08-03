@@ -20,7 +20,7 @@
 {{super()}}
 <link rel="stylesheet"
       href="{{url_for('static', filename='css/custom.css')}}">
-      
+
 {% endblock %}
 
 {% block title %}{{ title }}{% endblock %}
@@ -61,4 +61,5 @@
 {% block scripts %}
 {{super()}}
 {{google.analytics(account="UA-47494721-11")}}
+{{ moment.include_moment() }}
 {% endblock %}
