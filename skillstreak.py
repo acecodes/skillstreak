@@ -1,8 +1,15 @@
+try:
+	import config
+	SQLALCHEMY_DATABASE_URI = config.SQLALCHEMY_DATABASE_URI
+except ImportError:
+	pass
+
 import os
 import time
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask.ext.moment import Moment
+from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
@@ -15,12 +22,29 @@ title = 'Skill Streak'
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+db = SQLAlchemy(app)
 
 app.config['SECRET_KEY'] = 'This is a temporary key that will be replaced once the app is deployed'
 
 class NameForm(Form):
 	name = StringField('What is your name?', validators=[Required()])
 	submit = SubmitField('Submit')
+
+class Role(db.model):
+	__tablename__ = 'roles'
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(64), unique=True)
+
+	def __repr__(self):
+		return '<Role %r>' % self.name
+
+class User(db.model):
+	__tablename__ = 'users'
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(64), unique=True, index=True)
+
+	def __repr__(self):
+		return '<User %r>' % self.username
 
 @app.context_processor
 def basics():
