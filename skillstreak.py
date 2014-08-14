@@ -86,4 +86,4 @@ def server_error(e):
 	return 'Aww snap, there was an internal error!', 500
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True, port=8001)
