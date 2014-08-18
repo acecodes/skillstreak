@@ -10,7 +10,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 from flask_bootstrap import Bootstrap
 from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, date
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
@@ -48,9 +48,15 @@ class User(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.username
 
+
+def streak(year, month, day):
+	today = date.today()
+	start = date(year, month, day)
+	return today - start
+
 @app.context_processor
 def basics():
-	return {'year':year, 'title':title, 'current_time':current_time}
+	return {'year':year, 'title':title, 'current_time':current_time, 'streak':streak}
 
 # Views
 
