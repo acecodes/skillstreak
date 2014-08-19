@@ -49,10 +49,10 @@ class User(db.Model):
 		return '<User %r>' % self.username
 
 
-def streak(year, month, day):
+def streak(user, year, month, day):
 	today = date.today()
 	start = date(year, month, day)
-	return today - start
+	return str(today - start)
 
 @app.context_processor
 def basics():
