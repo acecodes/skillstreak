@@ -1,9 +1,3 @@
-try:
-	import config
-	SQLALCHEMY_DATABASE_URI = config.SQLALCHEMY_DATABASE_URI
-except ImportError:
-	pass
-
 import os
 import time
 from flask import Flask, render_template, request, session, redirect, url_for, flash
@@ -25,6 +19,8 @@ moment = Moment(app)
 db = SQLAlchemy(app)
 
 app.config['SECRET_KEY'] = 'This is a temporary key that will be replaced once the app is deployed'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+
 
 class NameForm(Form):
 	name = StringField('What is your name?', validators=[Required()])
@@ -43,7 +39,11 @@ class User(db.Model):
 	__tablename__ = 'users'
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), unique=True, index=True)
-	role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+	email = db.Column(db.String(120), unique=True)
+
+	def __init__(self, username, email):
+		self.username = username
+		self.email = email
 
 	def __repr__(self):
 		return '<User %r>' % self.username
