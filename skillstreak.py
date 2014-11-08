@@ -14,6 +14,8 @@ from datetime import datetime, date
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
+from flask.ext.script import Shell, Manager
+from flask.ext.migrate import Migrate, MigrateCommand
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,6 +32,8 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 db = SQLAlchemy(app)
+manager = Manager(app)
+migrate = Migrate(app, db)
 
 class NameForm(Form):
 	name = StringField('What is your name?', validators=[Required()])
@@ -62,6 +66,14 @@ def streak(user, year, month, day):
 @app.context_processor
 def basics():
 	return {'year':year, 'title':title, 'current_time':current_time, 'streak':streak}
+
+def make_shell_context():
+	return dict(app=app, db=db, User=User, Role=Role)
+
+# Manager commands
+manager.add_command("shell", Shell(make_context=make_shell_context))
+manager.add_command("db", MigrateCommand)
+
 
 # Views
 
@@ -109,4 +121,5 @@ def server_error(e):
 	return 'Aww snap, there was an internal error!', 500
 
 if __name__ == '__main__':
-	app.run(debug=True, port=8001)
+	manager.run()
+	#app.run(debug=True, port=8001)
