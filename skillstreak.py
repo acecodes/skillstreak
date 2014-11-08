@@ -1,8 +1,8 @@
-try:
-	import config
-	SQLALCHEMY_DATABASE_URI = config.SQLALCHEMY_DATABASE_URI
-except ImportError:
-	pass
+# try:
+# 	import config
+# 	SQLALCHEMY_DATABASE_URI = config.SQLALCHEMY_DATABASE_URI
+# except ImportError:
+# 	pass
 
 import os
 import time
@@ -14,6 +14,8 @@ from datetime import datetime, date
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 year = time.strftime("%Y")
 current_time = datetime.utcnow()
@@ -34,6 +36,7 @@ class NameForm(Form):
 	submit = SubmitField('Submit')
 
 class Role(db.Model):
+	__tablename__ = 'roles'
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64), unique=True)
 	users = db.relationship('User', backref='role')
@@ -41,7 +44,7 @@ class Role(db.Model):
 	def __repr__(self):
 		return '<Role %r>' % self.name
 
-class User(db.Model)
+class User(db.Model):
 	__tablename__ = 'users'
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), unique=True, index=True)
