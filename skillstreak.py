@@ -20,18 +20,20 @@ current_time = datetime.utcnow()
 title = 'Skill Streak'
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'This is a temporary key that will be replaced once the app is deployed'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 db = SQLAlchemy(app)
-
-app.config['SECRET_KEY'] = 'This is a temporary key that will be replaced once the app is deployed'
 
 class NameForm(Form):
 	name = StringField('What is your name?', validators=[Required()])
 	submit = SubmitField('Submit')
 
 class Role(db.Model):
-	__tablename__ = 'roles'
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64), unique=True)
 	users = db.relationship('User', backref='role')
@@ -39,7 +41,7 @@ class Role(db.Model):
 	def __repr__(self):
 		return '<Role %r>' % self.name
 
-class User(db.Model):
+class User(db.Model)
 	__tablename__ = 'users'
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), unique=True, index=True)
