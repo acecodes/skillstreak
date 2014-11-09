@@ -16,17 +16,29 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from flask.ext.script import Shell, Manager
 from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.mail import Mail
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 year = time.strftime("%Y")
 current_time = datetime.utcnow()
 title = 'Skill Streak'
+mail = Mail(app)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'This is a temporary key that will be replaced once the app is deployed'
+
+# SQLAlchemy DB config
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+# Email config
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+
 
 
 bootstrap = Bootstrap(app)
