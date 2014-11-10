@@ -17,6 +17,7 @@ from wtforms.validators import Required
 from flask.ext.script import Shell, Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.mail import Mail, Message
+from threading import Thread
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -71,11 +72,16 @@ class User(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.username
 
+def send_async_email(app, msg):
+	with app.app_context():
+		mail.send(msg)
+
 def send_email(to, subject, template, **kwargs):
 	msg = Message(app.config['SKILLSTREAK_MAIL_SUBJECT_PREFIX'] + subject, sender=app.config['SKILLSTREAK_MAIL_SENDER'], recipients=[to])
 	msg.body = render_template(template + '.txt', **kwargs)
 	msg.html = render_template(template + '.html', **kwargs)
-	mail.send(msg)
+	thr = Thread(target=send_async_email, args=[app, msg])
+	thr.start()
 
 def streak(user, year, month, day):
 	today = date.today()
@@ -106,6 +112,8 @@ def index():
 			user = User(username = form.name.data)
 			db.session.add(user)
 			session['known'] = False
+			if app.config['SKILLSTREAK_ADMIN']:
+				send_email(app.config['SKILLSTREAK_ADMIN'], 'New User', 'mail/new_user', user=user)
 		else:
 			session['known'] = True
 		session['name'] = form.name.data
