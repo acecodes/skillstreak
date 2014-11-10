@@ -16,14 +16,13 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from flask.ext.script import Shell, Manager
 from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.mail import Mail
+from flask.ext.mail import Mail, Message
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 year = time.strftime("%Y")
 current_time = datetime.utcnow()
 title = 'Skill Streak'
-mail = Mail(app)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'This is a temporary key that will be replaced once the app is deployed'
@@ -38,7 +37,9 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-
+app.config['SKILLSTREAK_MAIL_SUBJECT_PREFIX'] = '[SkillStreak]'
+app.config['SKILLSTREAK_MAIL_SENDER'] = 'SkillStreak Admin <info@skillstreak.com>'
+app.config['SKILLSTREAK_ADMIN'] = os.environ.get('SKILLSTREAK_ADMIN')
 
 
 bootstrap = Bootstrap(app)
@@ -46,6 +47,7 @@ moment = Moment(app)
 db = SQLAlchemy(app)
 manager = Manager(app)
 migrate = Migrate(app, db)
+mail = Mail(app)
 
 class NameForm(Form):
 	name = StringField('What is your name?', validators=[Required()])
@@ -69,6 +71,11 @@ class User(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.username
 
+def send_email(to, subject, template, **kwargs):
+	msg = Message(app.config['SKILLSTREAK_MAIL_SUBJECT_PREFIX'] + subject, sender=app.config['SKILLSTREAK_MAIL_SENDER'], recipients=[to])
+	msg.body = render_template(template + '.txt', **kwargs)
+	msg.html = render_template(template + '.html', **kwargs)
+	mail.send(msg)
 
 def streak(user, year, month, day):
 	today = date.today()
