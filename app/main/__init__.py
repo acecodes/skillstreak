@@ -1,9 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Blueprint
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
+
+main = Blueprint('main', __name__)
+from . import views, errors
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -19,5 +22,8 @@ def create_app(config_name):
 	mail.init_app(app)
 	moment.init_app(app)
 	db.init_app(app)
+
+	from .main import main as main_blueprint
+	app.register_blueprint(main_blueprint)
 
 	return app
