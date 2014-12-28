@@ -1,4 +1,5 @@
 from django.views import generic
+from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
@@ -13,9 +14,9 @@ class MemberView(generic.View):
 	template_name = 'member.html'
 
 	def get(self, request):
-		username = request.POST['username']
+		email = request.POST['email']
 		password = request.POST['password']
-		user = authenticate(username=username, password=password)
+		user = authenticate(username=email, password=password)
 		if user is not None:
 			if user.is_active:
 				login(request, user)
