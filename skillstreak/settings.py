@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'streaks',
+    'members',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +64,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+TABLE_PREFIX = {'system': 'sys_', 'core': 'core_', 'relation': 'rel_'}
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -82,7 +85,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 

@@ -1,23 +1,13 @@
 from django.views import generic
-from django.views.generic.edit import FormView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from .forms import LoginForm
 
-class IndexView(generic.View):
+class IndexView(generic.edit.FormView):
     template_name = 'index.html'
+    form_class = LoginForm
+    success_url = '/dashboard/'
 
-    def get(self, request):
-    	return render(request, self.template_name)
-
-class MemberView(generic.View):
-	template_name = 'member.html'
-
-	def get(self, request):
-		email = request.POST['email']
-		password = request.POST['password']
-		user = authenticate(username=email, password=password)
-		if user is not None:
-			if user.is_active:
-				login(request, user)
-				return render(request, self.template_name)
+    def form_valid(self, form):
+        return super(IndexView, self).form_valid(form)
