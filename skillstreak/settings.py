@@ -42,7 +42,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'streaks',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+
 )
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,6 +66,20 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'skillstreak.urls'
 
 WSGI_APPLICATION = 'skillstreak.wsgi.application'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+    )
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # The next 3 are for django-allauth
+    "django.core.context_processors.request",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+    "django.contrib.auth.context_processors.auth",
+    )
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
