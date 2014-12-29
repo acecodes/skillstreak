@@ -8,6 +8,7 @@
 		<meta name="description" content="{% block description %}{% endblock %}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="{% static 'vendor/bootstrap.css' %}" rel="stylesheet">
+		<link href="{% static 'css/custom.css' %}" rel="stylesheet">
 	</head>
 	<body>
 
@@ -23,12 +24,12 @@
           </button>
           <a class="navbar-brand" href="#">SkillStreak</a>
         </div>
-        {% block signin-form %}
+        {% block auth-buttons %}
         {% endblock %}
     </nav>
     {% endblock %}
 	
-	<div class="container">
+	<div class="container" id="{% block container-id %}{% endblock %}">
 		{% block content %}
 		{% endblock %}
 	</div>

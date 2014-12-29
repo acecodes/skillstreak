@@ -1,9 +1,7 @@
 from django import forms
-from members.models import Member
+from django.contrib.auth.forms import AuthenticationForm
 
-class LoginForm(forms.ModelForm):
-	class Meta:
-		model = Member
-		fields = ('email', 'password',)
-		widgets = {'password':forms.PasswordInput}
+class LoginForm(AuthenticationForm):
+	def confirm_login_allowed(self, user):
+		pass
 

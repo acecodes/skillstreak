@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block container-id %}authforms{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+
+{% csrf_token %}
+<div class="form-group" id="authforms">
+    {{ form.username.label_tag }}
+    {{ form.username }}
+</div>
+<div class="form-group">
+    {{ form.password.label_tag }}
+    {{ form.password }}
+</div>
+
+<button type="submit" value="login" class="btn btn-success">Login</button>
+</form>
+
+{% endblock %}

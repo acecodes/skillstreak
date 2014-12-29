@@ -2,12 +2,11 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import login
 from .forms import LoginForm
 
-class IndexView(generic.edit.FormView):
-    template_name = 'index.html'
-    form_class = LoginForm
-    success_url = '/dashboard/'
+def index(request):
+    return render(request, 'index.html')
 
-    def form_valid(self, form):
-        return super(IndexView, self).form_valid(form)
+def dashboard(request):
+    return render(request, 'dashboard.html')

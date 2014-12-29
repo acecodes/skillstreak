@@ -3,10 +3,15 @@
 
 {% block content %}
   <div class="jumbotron">
-    <h1>Welcome to SkillStreak, {{email}}!</h1>
+    <h1>Welcome to SkillStreak, {{ username }}!</h1>
     <p>The best tool available for simple, effective habit tracking.</p>
     <p><a class="btn btn-primary btn-lg">Learn more</a></p>
   </div>
+
 {% endblock %}
 
+{% block auth-buttons %}
 
+<a href="/logout"><button class="btn btn-alert">Logout</button></a>
+
+{% endblock %}

@@ -10,21 +10,10 @@
 
 {% endblock %}
 
-{% block signin-form %}
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" 
-          action="/" method="post">
-              {% csrf_token %}
-              {% for field in form %}
-            <div class="form-group">
-                <input id="id_{{ field.id_for_label }}" name="{{ field.html_name }}" type="{{ field.label }}" value="{{ field.label }}" class="form-control">
-            </div>
-            {% endfor %}
+{% block auth-buttons %}
 
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div>
-        <!--/.navbar-collapse -->
+<a href="/login"><button class="btn btn-success">Login</button></a>
+
 {% endblock %}
 
 
