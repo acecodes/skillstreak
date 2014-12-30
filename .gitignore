@@ -56,3 +56,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Test e-mail messages
+test_messages/

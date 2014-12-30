@@ -5,6 +5,7 @@
   <div class="jumbotron">
     <h1>Welcome to SkillStreak, {{ user }}!</h1>
     <p>The best tool available for simple, effective habit tracking.</p>
+    {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
   </div>
 
 {% endblock %}
