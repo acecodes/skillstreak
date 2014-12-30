@@ -24,8 +24,12 @@
           </button>
           <a class="navbar-brand" href="#">SkillStreak</a>
         </div>
-        {% block auth-buttons %}
-        {% endblock %}
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+		        {% block auth-buttons %}
+		        {% endblock %}
+		  </ul>
+        </div>
     </nav>
     {% endblock %}
 	
