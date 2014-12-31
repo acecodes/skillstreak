@@ -1,8 +1,6 @@
 
 @mixin bootstrap-inputs {display: block;
-	text-align:center;
   width: 50%;
-  margin: 0 25% 0 25%;
   height: 43px;
   padding: 10px 18px;
   font-size: 15px;
@@ -18,8 +16,13 @@
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;}
 
-#id_password { @include bootstrap-inputs; }
+#id_login { @include bootstrap-inputs; }
 #id_username { @include bootstrap-inputs; }
+#id_email{ @include bootstrap-inputs; }
+#id_password { @include bootstrap-inputs; }
+#id_password1 { @include bootstrap-inputs; }
+#id_password2 { @include bootstrap-inputs; }
+
 
 .container#authforms { text-align:center; }
 .form-group#authforms { text-align:center; }
