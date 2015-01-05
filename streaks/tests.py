@@ -10,6 +10,11 @@ class FuncTest(TestCase):
 		driver.get("http://127.0.0.1:8100")
 		self.assertIn("SkillStreak", driver.title)
 
+	def test_api_up(self):
+		driver = self.driver
+		driver.get("http://127.0.0.1:8100/api")
+		self.assertIn("Django REST", driver.title)
+		
 	def tearDown(self):
 		self.driver.close()
 
