@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.template import RequestContext
 from .models import Streak
 from .serializers import StreakSerializer, UserSerializer
 from rest_framework import viewsets, mixins
@@ -14,8 +15,11 @@ def index(request):
 
 @login_required
 def dashboard(request):
+    context_instance = RequestContext(request)
+    template = 'dashboard.html'
     streaks = Streak.objects.filter(user=request.user)
-    return render(request, 'dashboard.html', {'streaks': streaks})
+    return render_to_response(template, {'streaks': streaks},
+                              context_instance)
 
 
 class StreakViewSet(viewsets.ModelViewSet, mixins.CreateModelMixin):

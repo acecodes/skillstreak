@@ -1,6 +1,8 @@
 Django==1.7.1
 defusedxml==0.4.1
 django-allauth==0.18.0
+django-dajax==0.9.2
+django-dajaxice==0.7
 djangorestframework==3.0.2
 oauthlib==0.7.2
 psycopg2==2.5.4

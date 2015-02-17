@@ -2,16 +2,13 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
-    <h1>Welcome to SkillStreak, {{ user }}!</h1>
-      <div class="dash_options">
-  <span><a href="/accounts/email/">Email options</a></span> |
-  <span><a href="/accounts/password/change/">Change password</a></span> |
-  <span>Email status: {% if request.user.profile.account_verified %}
-  Verified {% else %} Unverified {% endif %}</span>
-  </div>
-  </div>
-  <h1 class="streak_headline">Streaks</h1>
+  <h1 class="streak_headline">
+  {% if user.first_name %}
+  {{ user.first_name }}'s Streaks
+  {% else %}
+  {{ user }}'s Streaks
+  {% endif %}
+  </h1>
   <hr>
   {% for i in streaks %}
   <div class="streaks">
@@ -22,6 +19,13 @@
   <hr>
   {% endfor %}
   
+  <div class="dash_options">
+  <h3>Account options</h3>
+  <span><a href="/accounts/email/">Email options</a></span> |
+  <span><a href="/accounts/password/change/">Change password</a></span> |
+  <span>Email status: {% if request.user.profile.account_verified %}
+  Verified {% else %} Unverified {% endif %}</span>
+  </div>
 
 {% endblock %}
 
