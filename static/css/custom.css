@@ -1,3 +1,6 @@
+.jumbotron {
+  background-color: #F4F4F4; }
+
 #id_login {
   display: block;
   width: 50%;
@@ -106,8 +109,28 @@
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
 
+.streaks {
+  text-align: left; }
+
+p#activity {
+  font-size: 2em; }
+
+p#current_streak {
+  font-size: 5em; }
+
+p#longest_streak {
+  font-size: 1.5em; }
+
+.dash_options {
+  font-size: 1em; }
+
+.streak_headline {
+  text-align: center; }
+
 .container#authforms {
   text-align: center; }
 
 .form-group#authforms {
   text-align: center; }
+
+/*# sourceMappingURL=custom.css.map */

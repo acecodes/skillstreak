@@ -4,15 +4,24 @@
 {% block content %}
   <div class="jumbotron">
     <h1>Welcome to SkillStreak, {{ user }}!</h1>
-    <p>The best tool available for simple, effective habit tracking.</p>
+      <div class="dash_options">
+  <span><a href="/accounts/email/">Email options</a></span> |
+  <span><a href="/accounts/password/change/">Change password</a></span> |
+  <span>Email status: {% if request.user.profile.account_verified %}
+  Verified {% else %} Unverified {% endif %}</span>
   </div>
-
-  <div>
-  <p><a href="/accounts/email/">Email options</a></p>
-  <p><a href="/accounts/password/change/">Change password</a></p>
-  <p>Email status: {% if request.user.profile.account_verified %}
-  Verified {% else %} Unverified {% endif %}</p>
   </div>
+  <h1 class="streak_headline">Streaks</h1>
+  <hr>
+  {% for i in streaks %}
+  <div class="streaks">
+  <p id="current_streak">{{ i.current_streak }}</p>
+  <p id="activity">{{ i.activity }}</p>
+  <p id="longest_streak">Longest streak: {{ i.longest_streak }}</p>
+  </div>
+  <hr>
+  {% endfor %}
+  
 
 {% endblock %}
 

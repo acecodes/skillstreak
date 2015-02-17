@@ -16,12 +16,21 @@
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;}
 
+.jumbotron { background-color: #F4F4F4; }
+
 #id_login { @include bootstrap-inputs; }
 #id_username { @include bootstrap-inputs; }
 #id_email{ @include bootstrap-inputs; }
 #id_password { @include bootstrap-inputs; }
 #id_password1 { @include bootstrap-inputs; }
 #id_password2 { @include bootstrap-inputs; }
+.streaks { text-align:left; }
+p#activity { font-size: 2em; }
+p#current_streak { font-size:5em; }
+p#longest_streak { font-size: 1.5em; }
+
+.dash_options { font-size:1em; }
+.streak_headline { text-align: center; }
 
 
 .container#authforms { text-align:center; }
