@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Welcome!{% endblock %}
+{% load streak_tags %}
 
 {% block content %}
   <h1 class="streak_headline">
@@ -12,13 +13,13 @@
   <hr>
   {% for i in streaks %}
   <div class="streaks">
+    <p id="activity">{{ i.activity }}</p>
+ {{ i.current_streak | gen_multiply | safe }}
   <p id="current_streak">{{ i.current_streak }}</p>
-  <p id="activity">{{ i.activity }}</p>
   <p id="longest_streak">Longest streak: {{ i.longest_streak }}</p>
   </div>
   <hr>
   {% endfor %}
-  
   <div class="dash_options">
   <h3>Account options</h3>
   <span><a href="/accounts/email/">Email options</a></span> |
