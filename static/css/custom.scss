@@ -1,4 +1,4 @@
-
+// Restyling input boxes
 @mixin bootstrap-inputs {display: block;
   width: 50%;
   height: 43px;
@@ -16,23 +16,24 @@
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;}
 
-.jumbotron { background-color: #F4F4F4; }
-
 #id_login { @include bootstrap-inputs; }
 #id_username { @include bootstrap-inputs; }
 #id_email{ @include bootstrap-inputs; }
 #id_password { @include bootstrap-inputs; }
 #id_password1 { @include bootstrap-inputs; }
 #id_password2 { @include bootstrap-inputs; }
+.container#authforms { text-align:center; }
+.form-group#authforms { text-align:center; }
+
+// Front page styles
+.jumbotron { background-color: #F4F4F4; }
+
+// Dashboard styles
 .streaks { text-align:left; }
 p#activity { font-size: 2em; }
 p#current_streak { font-size:5em; }
 p#longest_streak { font-size: 1.5em; }
-
 .dash_options { font-size:1em; text-align: center; }
 .streak_headline { text-align: center; }
 h1.streak_headline { font-size: 3em; }
-
-
-.container#authforms { text-align:center; }
-.form-group#authforms { text-align:center; }
+span.streak_box { background:#76D55C; width: 5px; height: 2px; }

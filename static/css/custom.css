@@ -1,6 +1,3 @@
-.jumbotron {
-  background-color: #F4F4F4; }
-
 #id_login {
   display: block;
   width: 50%;
@@ -109,6 +106,15 @@
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
 
+.container#authforms {
+  text-align: center; }
+
+.form-group#authforms {
+  text-align: center; }
+
+.jumbotron {
+  background-color: #F4F4F4; }
+
 .streaks {
   text-align: left; }
 
@@ -131,10 +137,9 @@ p#longest_streak {
 h1.streak_headline {
   font-size: 3em; }
 
-.container#authforms {
-  text-align: center; }
-
-.form-group#authforms {
-  text-align: center; }
+span.streak_box {
+  background: #76D55C;
+  width: 5px;
+  height: 2px; }
 
 /*# sourceMappingURL=custom.css.map */

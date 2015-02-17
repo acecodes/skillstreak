@@ -3,6 +3,7 @@
 {% load streak_tags %}
 
 {% block content %}
+ {# Top block #}
   <h1 class="streak_headline">
   {% if user.first_name %}
   {{ user.first_name }}'s Streaks
@@ -10,16 +11,32 @@
   {{ user }}'s Streaks
   {% endif %}
   </h1>
+  <h4 class="streak_headline">Please note: this is a prototype interface</h4>
   <hr>
+
+  {# Streaks #}
   {% for i in streaks %}
   <div class="streaks">
     <p id="activity">{{ i.activity }}</p>
- {{ i.current_streak | gen_multiply | safe }}
-  <p id="current_streak">{{ i.current_streak }}</p>
-  <p id="longest_streak">Longest streak: {{ i.longest_streak }}</p>
+      <p>Started: {{ i.start }}
+      <p id="longest_streak">Longest streak: {{ i.longest_streak }}</p>
+
+      {# Generate streak boxes - hack until JS implemented #}
+      <p>{{ i.current_streak | gen_multiply | safe }}</p>
+  
+      <p id="current_streak">{{ i.current_streak }}</p>
+      <p>Since: {{ i.current_streak | date_delta }}</p>
+
+
+        {# Blank space if notes do not exist #}
+        {% if i.notes == None %}
+        {% else %}<p>Notes: {{ i.notes }}</p>{% endif %}
+    
   </div>
   <hr>
   {% endfor %}
+
+  {# Account options #}
   <div class="dash_options">
   <h3>Account options</h3>
   <span><a href="/accounts/email/">Email options</a></span> |
