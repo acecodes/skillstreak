@@ -21,4 +21,12 @@ class StreakSerializer(serializers.ModelSerializer):
     class Meta:
         model = Streak
         fields = (
-            'user', 'activity', 'start', 'current_streak', 'longest_streak')
+            'id',
+            'user',
+            'activity',
+            'start',
+            'current_streak',
+            'longest_streak',
+            'resets',
+            'last_reset',
+            'notes',)

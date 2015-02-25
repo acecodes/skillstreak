@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Welcome!{% endblock %}
 {% load streak_tags %}
+{% load staticfiles %}
 
 {% block content %}
  {# Top block #}
@@ -31,12 +32,7 @@
         {# Blank space if notes do not exist #}
         {% if i.notes == None %}
         {% else %}<p>Notes: {{ i.notes }}</p>{% endif %}
-        {% if i.current_streak >= 1 %}
-        <p><a href="{{ i | reset_current_streak }}">Reset</a></p>
-        <p><a href="{{ i | subtract_from_streak }}">Subtract</a></p>
-        {% endif %}
-        <p><a href="{{ i | add_to_streak }}">Add</a>
-    
+  
   </div>
   <hr>
   {% endfor %}

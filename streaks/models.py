@@ -14,7 +14,7 @@ class Streak(models.Model):
     longest_streak = models.IntegerField(default=0)
     resets = models.IntegerField(default=0)
     last_reset = models.DateTimeField(null=True)
-    notes = models.TextField(null=True)
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return '{member} - {activity} - {start}'.format(

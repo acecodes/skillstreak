@@ -42,19 +42,36 @@ class StreakView(generics.RetrieveAPIView):
         pass
 
 
-class StreakViewSet(viewsets.ModelViewSet, mixins.CreateModelMixin):
+class StreakViewSet(viewsets.ModelViewSet,
+                    mixins.CreateModelMixin,
+                    mixins.RetrieveModelMixin,):
 
     """
-    API endpoint for user streaks
+    View your current streaks.
     """
     queryset = Streak.objects.all()
     serializer_class = StreakSerializer
 
+    def get_queryset(self):
+        """
+        Return only results relevant to current user
+        """
+        user = self.request.user
+        return Streak.objects.filter(user=user)
 
-class UserViewSet(viewsets.ModelViewSet, mixins.CreateModelMixin):
+
+
+class UserViewSet(viewsets.ModelViewSet):
 
     """
-    API endpoint that allows users to be viewed or edited.
+    Check out your own user details.
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        """
+        Return only results relevant to current user
+        """
+        user = self.request.user
+        return User.objects.filter(id=user.id)
