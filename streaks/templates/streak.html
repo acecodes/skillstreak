@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Streak Detail Page{% endblock %}
+{% load streak_tags %}
+
+{% block content %}
+ {# Top block #}
+  <h1 class="streak_headline">
+  {% if user.first_name %}
+  {{ user.first_name }}'s Streaks
+  {% else %}
+  {{ user }}'s Streaks
+  {% endif %}
+  </h1>
+  <h4 class="streak_headline">Please note: this is a prototype interface</h4>
+  <hr>
+
+{{ streak.current_streak }}
+
+{% block auth-buttons %}
+
+<li><a href="/logout">Logout</a></li>
+
+{% endblock %}

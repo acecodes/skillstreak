@@ -1,25 +1,45 @@
 from django.shortcuts import render, render_to_response
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template import RequestContext
+from rest_framework.renderers import TemplateHTMLRenderer
+from django.views.generic import View, UpdateView
+
 from .models import Streak
 from .serializers import StreakSerializer, UserSerializer
-from rest_framework import viewsets, mixins
-
-import datetime
+from rest_framework import viewsets, mixins, generics
 
 
 def index(request):
     return render(request, 'index.html')
 
 
-@login_required
-def dashboard(request):
-    context_instance = RequestContext(request)
-    template = 'dashboard.html'
-    streaks = Streak.objects.filter(user=request.user)
-    return render_to_response(template, {'streaks': streaks},
-                              context_instance)
+class Dashboard(View):
+    """
+    View that first greets a member after login
+    """
+
+    @method_decorator(login_required)
+    def get(self, request):
+        context_instance = RequestContext(request)
+        template = 'dashboard.html'
+        streaks = Streak.objects.filter(user=request.user)
+        return render_to_response(template, {'streaks': streaks},
+                                  context_instance)
+
+
+class StreakView(generics.RetrieveAPIView):
+    """
+    View for individual streaks
+    """
+    queryset = Streak.objects.all()
+    renderer_classes = (TemplateHTMLRenderer,)
+    template_name = 'streak.html'
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        pass
 
 
 class StreakViewSet(viewsets.ModelViewSet, mixins.CreateModelMixin):

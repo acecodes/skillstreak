@@ -26,6 +26,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+API_VERSION = r'1\.0'
+
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/login/'
@@ -42,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'streaks',
+    'api',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

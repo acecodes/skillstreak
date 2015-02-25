@@ -14,3 +14,18 @@ def gen_multiply(value):
 def date_delta(value):
     """Get time between now and start of streak"""
     return datetime.date.today() - datetime.timedelta(days=value)
+
+
+@register.filter
+def add_to_streak(obj):
+    return obj.add()
+
+
+@register.filter
+def subtract_from_streak(obj):
+    return obj.subtract()
+
+
+@register.filter
+def reset_current_streak(obj):
+    return obj.reset_current()

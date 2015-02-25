@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
 
+from django.utils import timezone
+
 
 class Streak(models.Model):
     user = models.ForeignKey(User)
@@ -19,6 +21,33 @@ class Streak(models.Model):
             member=self.user,
             activity=self.activity,
             start=self.start.strftime('%d %b %Y'))
+
+    def add(self):
+        """Add to our current streak"""
+        self.current_streak += 1
+        if self.current_streak >= self.longest_streak:
+            self.longest_streak = self.current_streak
+        self.save()
+
+    def subtract(self):
+        """Make sure we don't go negative"""
+        if self.current_streak == 0:
+            self.current_streak = 0
+        else:
+            self.current_streak -= 1
+        self.save()
+
+    def reset_current(self):
+        """Send current streak back to zero"""
+        self.current_streak = 0
+        self.last_reset = timezone.now()
+        self.resets += 1
+        self.save()
+
+    def reset_longest(self):
+        """Reset longest streak"""
+        self.longest_streak = 0
+        self.save()
 
     class Meta:
         db_table = settings.TABLE_PREFIX['relation'] + 'streaks'
