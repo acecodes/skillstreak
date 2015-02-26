@@ -4,11 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template import RequestContext
 from rest_framework.renderers import TemplateHTMLRenderer
-from django.views.generic import View, UpdateView
+from django.views.generic import View
 
 from .models import Streak
 from .serializers import StreakSerializer, UserSerializer
+
 from rest_framework import viewsets, mixins, generics
+from rest_framework import permissions
+
+from oauth2_provider.decorators import protected_resource
+from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
 
 
 def index(request):
@@ -44,21 +49,21 @@ class StreakView(generics.RetrieveAPIView):
 
 class StreakViewSet(viewsets.ModelViewSet,
                     mixins.CreateModelMixin,
-                    mixins.RetrieveModelMixin,):
+                    mixins.RetrieveModelMixin,
+                    mixins.DestroyModelMixin):
 
     """
     View your current streaks.
     """
     queryset = Streak.objects.all()
     serializer_class = StreakSerializer
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
 
     def get_queryset(self):
-        """
-        Return only results relevant to current user
-        """
-        user = self.request.user
-        return Streak.objects.filter(user=user)
-
+        if self.request.user.is_superuser:
+            return Streak.objects.all()
+        else:
+            return Streak.objects.filter(id=self.request.user.id)
 
 
 class UserViewSet(viewsets.ModelViewSet):

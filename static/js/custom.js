@@ -11,8 +11,8 @@ $(document).ready(function() {
             dataType: 'json',
             data: JSON.stringify({
                 "user": "root",
-                "activity": "AJAX test",
-                "start": "2015-02-27T22:53:51Z",
+                "activity": "AJAX testing",
+                "start": "2015-02-21T22:53:51Z",
                 "current_streak": 2,
                 "longest_streak": 5,
                 "resets": 0,

@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'streaks',
     'api',
+    'oauth2_provider',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -53,18 +54,27 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'rest_framework',
-    'oauth2_provider',
     'corsheaders',
 )
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
-   'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+    'DEFAULT_PERMISSION_CLASSES': (
+         'rest_framework.permissions.IsAuthenticated',
     ),
-   'PAGINATE_BY': 10,
+    'PAGINATE_BY': 10,
+}
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {
+     'read': 'Read scope',
+     'write': 'Write scope',
+     'groups': 'Access to your groups'
+    }
 }
 
 SITE_ID = 1
@@ -78,6 +88,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 )
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -87,6 +98,7 @@ ROOT_URLCONF = 'skillstreak.urls'
 WSGI_APPLICATION = 'skillstreak.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
+    "oauth2_provider.backends.OAuth2Backend",
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
     )
