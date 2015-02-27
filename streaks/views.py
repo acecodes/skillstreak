@@ -3,17 +3,13 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template import RequestContext
-from rest_framework.renderers import TemplateHTMLRenderer
 from django.views.generic import View
 
 from .models import Streak
 from .serializers import StreakSerializer, UserSerializer
 
 from rest_framework import viewsets, mixins, generics
-from rest_framework import permissions
-
-from oauth2_provider.decorators import protected_resource
-from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
+from rest_framework.renderers import TemplateHTMLRenderer
 
 
 def index(request):
@@ -57,7 +53,6 @@ class StreakViewSet(viewsets.ModelViewSet,
     """
     queryset = Streak.objects.all()
     serializer_class = StreakSerializer
-    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
 
     def get_queryset(self):
         if self.request.user.is_superuser:

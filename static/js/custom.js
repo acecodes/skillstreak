@@ -4,6 +4,20 @@ $(document).ready(function() {
 
     // Button to test AJAX posting
     $(".test_button").click(function() {
+        var csrftoken = $.cookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+        
         $.ajax({
             type: "POST",
             url: '/api/streaks/',
@@ -17,10 +31,15 @@ $(document).ready(function() {
                 "longest_streak": 5,
                 "resets": 0,
                 "last_reset": "2015-02-25T22:53:55Z",
-                "notes": "A"
+                "notes": "A",
+                "csrfmiddlewaretoken": csrftoken
             })
-            
-        }).error(function(r){ console.log(r); })
-.success(function(r){ console.log("success", r); });
+
+        }).error(function(r) {
+            console.log(r);
+        })
+            .success(function(r) {
+                console.log("success", r);
+            });
     });
 });
