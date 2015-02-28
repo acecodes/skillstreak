@@ -53,6 +53,7 @@ class Streak(models.Model):
         db_table = settings.TABLE_PREFIX['relation'] + 'streaks'
         verbose_name = 'Member Streak'
         ordering = ['-start']
+        unique_together = ("user", "activity")
 
 
 class UserProfile(models.Model):

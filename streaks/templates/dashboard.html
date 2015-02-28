@@ -13,17 +13,16 @@
   {% endif %}
   </h1>
   <h4 class="streak_headline">Please note: this is a prototype interface</h4>
+  
+  <button class="post_button">POST</button>
+  <button class="delete_button">DELETE</button>
+  <button class="refresh_button">REFRESH</button>
   <hr>
 
-{% csrf_token %}
-
-<button class="test_button">Test</button>
-  {# Test box #}
-  <div class="test_box">
-  </div>
   {# Streaks #}
-  {% for i in streaks %}
   <div class="streaks">
+  {% for i in streaks %}
+  <div class="single_streak" id="streak_{{ i.id }}">
     <p id="activity">{{ i.activity }}</p>
       <p>Started: {{ i.start }}
       <p id="longest_streak">Longest streak: {{ i.longest_streak }}</p>
@@ -38,11 +37,9 @@
         {# Blank space if notes do not exist #}
         {% if i.notes == None %}
         {% else %}<p>Notes: {{ i.notes }}</p>{% endif %}
-  
   </div>
-  <hr>
   {% endfor %}
-
+  </div>
   {# Account options #}
   <div class="dash_options">
   <h3>Account options</h3>

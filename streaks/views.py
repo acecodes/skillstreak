@@ -3,25 +3,26 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template import RequestContext
-from django.views.generic import View
 
 from .models import Streak
 from .serializers import StreakSerializer, UserSerializer
 
 from rest_framework import viewsets, mixins, generics
 from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.permissions import IsAuthenticated
 
 
 def index(request):
     return render(request, 'index.html')
 
 
-class Dashboard(View):
+class Dashboard(generics.RetrieveUpdateDestroyAPIView):
     """
     View that first greets a member after login
     """
+    permission_classes = (IsAuthenticated,)
+    queryset = Streak.objects.all()
 
-    @method_decorator(login_required)
     def get(self, request):
         context_instance = RequestContext(request)
         template = 'dashboard.html'

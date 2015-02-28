@@ -118,6 +118,9 @@
 .streaks {
   text-align: left; }
 
+.single_streak {
+  text-align: left; }
+
 p#activity {
   font-size: 2em; }
 
@@ -141,5 +144,16 @@ span.streak_box {
   background: #76D55C;
   width: 5px;
   height: 2px; }
+
+.test_box {
+  width: 100%;
+  height: 100px; }
+
+.single_streak {
+  text-align: left;
+  border-bottom: 1px solid #BFBFBF;
+  border-top: 1px solid #BFBFBF;
+  margin: 0 0 2% 0;
+  padding: 1% 0 1% 0; }
 
 /*# sourceMappingURL=custom.css.map */
