@@ -14,10 +14,29 @@
   </h1>
   <h4 class="streak_headline">Please note: this is a prototype interface</h4>
   
+  <div id="buttons">
   <button class="post_button">POST</button>
   <button class="delete_button">DELETE</button>
   <button class="refresh_button">REFRESH</button>
+  <button id="account_options">Account Options</button>
+  </div>
+
+  {# Account options #}
+  <div id="dash_options">
   <hr>
+  <h3>Account options</h3>
+  <span><a href="/accounts/email/">Email options</a></span> |
+  <span><a href="/accounts/password/change/">Change password</a></span> |
+  <span>Email status: {% if request.user.profile.account_verified %}
+  Verified {% else %} Unverified {% endif %}</span>
+  <br /><br />
+  <button id="account_options_hide">Close</button>
+  <hr>
+  </div>
+
+  <div class="messages" id="error">
+  <p>I'm sorry, there was an error.</p>
+  </div>
 
   {# Streaks #}
   <div class="streaks">
@@ -39,14 +58,7 @@
         {% else %}<p>Notes: {{ i.notes }}</p>{% endif %}
   </div>
   {% endfor %}
-  </div>
-  {# Account options #}
-  <div class="dash_options">
-  <h3>Account options</h3>
-  <span><a href="/accounts/email/">Email options</a></span> |
-  <span><a href="/accounts/password/change/">Change password</a></span> |
-  <span>Email status: {% if request.user.profile.account_verified %}
-  Verified {% else %} Unverified {% endif %}</span>
+  <hr>
   </div>
 
 {% endblock %}

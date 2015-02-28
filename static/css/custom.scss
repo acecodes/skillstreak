@@ -61,9 +61,12 @@ p#current_streak {
 p#longest_streak {
   font-size: 1.5em;
 }
-.dash_options {
+
+#dash_options {
   font-size: 1em;
   text-align: center;
+  display:none;
+  padding:0 0 2% 0;
 }
 .streak_headline {
   text-align: center;
@@ -86,4 +89,17 @@ span.streak_box {
   border-top: 1px solid #BFBFBF;
   margin: 0 0 2% 0;
   padding: 1% 0 1% 0;
+}
+
+#buttons {
+  margin: 0 0 2% 0;
+}
+
+.messages {
+  width:100%;
+  text-align:center;
+}
+
+#error {
+  display:none;
 }
