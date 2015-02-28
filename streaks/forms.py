@@ -1,8 +1,13 @@
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.forms import ModelForm
+from .models import Streak
 
 
-class LoginForm(AuthenticationForm):
-
-    def confirm_login_allowed(self, user):
-        pass
+class AddStreakForm(ModelForm):
+    class Meta:
+        model = Streak
+        fields = ['activity',
+                  'start',
+                  'current_streak',
+                  'longest_streak',
+                  'notes'
+                  ]

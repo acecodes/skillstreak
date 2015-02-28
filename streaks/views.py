@@ -6,6 +6,7 @@ from django.template import RequestContext
 
 from .models import Streak
 from .serializers import StreakSerializer, UserSerializer
+from .forms import AddStreakForm
 
 from rest_framework import viewsets, mixins, generics
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -24,10 +25,13 @@ class Dashboard(generics.RetrieveUpdateDestroyAPIView):
     queryset = Streak.objects.all()
 
     def get(self, request):
+        addform = AddStreakForm()
         context_instance = RequestContext(request)
         template = 'dashboard.html'
         streaks = Streak.objects.filter(user=request.user)
-        return render_to_response(template, {'streaks': streaks},
+        return render_to_response(template,
+                                  {'streaks': streaks,
+                                   'addform': addform},
                                   context_instance)
 
 

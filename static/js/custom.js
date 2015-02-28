@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     // Hide account options
-    $("#account_options_hide").click(function () {
+    $("#account_options_hide").click(function() {
         $("#dash_options").fadeOut(fade);
     });
 
