@@ -20,10 +20,12 @@
   <button class="delete_button">DELETE</button>
   <button class="refresh_button">REFRESH</button>
   <button id="account_options">Account Options</button>
+  <button id="add_streak">Add streak</button>
   </div>
 
   <div id="add_form">
   {{ addform }}
+  <button id="add_form_hide">Close</button>
   </div>
 
   {# Account options #}
@@ -48,19 +50,28 @@
   {% for i in streaks %}
   <div class="single_streak" id="streak_{{ i.id }}">
     <p id="activity">{{ i.activity }}</p>
-      <p>Started: {{ i.start }}
-      <p id="longest_streak">Longest streak: {{ i.longest_streak }}</p>
+      <p>Started: {{ i.start }}</p>
 
       {# Generate streak boxes - hack until JS implemented #}
       <p>{{ i.current_streak | gen_multiply | safe }}</p>
   
-      <p id="current_streak">{{ i.current_streak }}</p>
-      <p>Since: {{ i.current_streak | date_delta }}</p>
+      <p class="big_numbers" id="current_streak_{{ i.id }}">{{ i.current_streak }}</p>
 
+      <span id="longest_streak_text">Longest streak:</span>
+      <span class="med_numbers" id="longest_streak_{{ i.id }}">{{ i.longest_streak }}</span>
+
+      <p>Since: {{ i.current_streak | date_delta }}</p>
 
         {# Blank space if notes do not exist #}
         {% if i.notes == None %}
         {% else %}<p>Notes: {{ i.notes }}</p>{% endif %}
+
+      <br />
+      <button class="id_test">ID Test {{ i.id }}</button>
+      <button class="delete_button">Delete streak</button>
+      <button class="increase_button">Increase streak</button>
+
+
   </div>
   {% endfor %}
   <hr>

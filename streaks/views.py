@@ -35,19 +35,6 @@ class Dashboard(generics.RetrieveUpdateDestroyAPIView):
                                   context_instance)
 
 
-class StreakView(generics.RetrieveAPIView):
-    """
-    View for individual streaks
-    """
-    queryset = Streak.objects.all()
-    renderer_classes = (TemplateHTMLRenderer,)
-    template_name = 'streak.html'
-
-    @method_decorator(login_required)
-    def get(self, request, *args, **kwargs):
-        pass
-
-
 class StreakViewSet(viewsets.ModelViewSet,
                     mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,

@@ -124,10 +124,10 @@
 p#activity {
   font-size: 2em; }
 
-p#current_streak {
-  font-size: 5em; }
+.big_numbers {
+  font-size: 3em; }
 
-p#longest_streak {
+.med_numbers {
   font-size: 1.5em; }
 
 #dash_options {
