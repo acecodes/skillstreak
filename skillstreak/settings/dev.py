@@ -15,7 +15,7 @@ from skillstreak.common import *
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'J2vv1*$)(z$^=2%pjp!gr<!@1tm@npZb+8tc?_7#wds&+(jql3)'
+SECRET_KEY = '5gp03waa#fuuooxgrn@4lk3s*_(d4v&0j@gyd=06l+0yq4+24)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

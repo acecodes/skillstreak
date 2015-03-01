@@ -16,18 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5gp03waa#fuuooxgrn@4lk3s*_(d4v&0j@gyd=06l+0yq4+24)'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
-
 API_VERSION = r'1\.0'
-
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/login/'
@@ -124,20 +113,6 @@ STATICFILES_DIRS = (
 
 TABLE_PREFIX = {'system': 'sys_', 'core': 'core_', 'relation': 'rel_'}
 
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'skillstreak',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST':'localhost',
-    }
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -156,8 +131,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Allow for email backend testing - change for production!
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'test_messages')
-
