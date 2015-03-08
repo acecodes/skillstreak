@@ -156,4 +156,4 @@ $(document).ready(function() {
         var id = $(this).parent().attr("id").slice(7);
         console.log(id);
     });
-});
+})();
