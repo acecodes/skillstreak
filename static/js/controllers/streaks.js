@@ -3,9 +3,9 @@
 
     /**
      * @ngdoc function
-     * @name frontendApp.controller:AboutCtrl
+     * @name streakApp.controller:StreakCtrl
      * @description
-     * # AboutCtrl
+     * # StreakCtrl
      * Controller of the frontendApp
      */
     angular.module('streakApp')

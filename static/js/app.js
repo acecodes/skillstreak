@@ -3,9 +3,9 @@
 
     /**
      * @ngdoc overview
-     * @name frontendApp
+     * @name streakApp
      * @description
-     * # frontendApp
+     * # streakAppp
      *
      * Main module of the application.
      */

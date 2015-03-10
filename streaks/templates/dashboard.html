@@ -3,6 +3,8 @@
 {% load streak_tags %}
 {% load staticfiles %}
 
+{% block app %}ng-app="streakApp"{% endblock %}
+
 {% block content %}
  {# Top block #}
   <h1 class="streak_headline">
@@ -13,15 +15,6 @@
   {% endif %}
   </h1>
   <h4 class="streak_headline">Please note: this is a prototype interface</h4>
-  
-  {# AJAX test buttons #}
-  <div id="buttons">
-  <button class="post_button">POST</button>
-  <button class="delete_button">DELETE</button>
-  <button class="refresh_button">REFRESH</button>
-  <button id="account_options">Account Options</button>
-  <button id="add_streak">Add streak</button>
-  </div>
 
   <div id="add_form">
   {{ addform }}
@@ -46,35 +39,20 @@
   </div>
 
   {# Streaks #}
-  <div class="streaks">
-  {% for i in streaks %}
-  <div class="single_streak" id="streak_{{ i.id }}">
-    <p id="activity">{{ i.activity }}</p>
-      <p>Started: {{ i.start }}</p>
-
-      {# Generate streak boxes - hack until JS implemented #}
-      <p>{{ i.current_streak | gen_multiply | safe }}</p>
-  
-      <p class="big_numbers" id="current_streak_{{ i.id }}">{{ i.current_streak }}</p>
-
-      <span id="longest_streak_text">Longest streak:</span>
-      <span class="med_numbers" id="longest_streak_{{ i.id }}">{{ i.longest_streak }}</span>
-
-      <p>Since: {{ i.current_streak | date_delta }}</p>
-
-        {# Blank space if notes do not exist #}
-        {% if i.notes == None %}
-        {% else %}<p>Notes: {{ i.notes }}</p>{% endif %}
-
-      <br />
-      <button class="id_test">ID Test {{ i.id }}</button>
-      <button class="delete_button">Delete streak</button>
-      <button class="increase_button">Increase streak</button>
-
-
-  </div>
-  {% endfor %}
+  <div class="streaks" ng-controller="StreakCtrl as ctrl">
+  {% verbatim %}
+  <div ng-repeat="user_streak in streak">
   <hr>
+  <p>Activity: {{ user_streak.activity }}</p>
+  <p>Start: {{ user_streak.start }}</p>
+  <p>Longest: {{ user_streak.current_streak }}</p>
+  <p>Current: {{ user_streak.longest_streak }}</p>
+  <p>Resets: {{ user_streak.resets }}</p>
+  <p>Last reset: {{ user_streak.last_rest }}</p>
+  <p>Notes: {{ user_streak.notes }}</p>
+  <hr>
+  </div>
+  {% endverbatim %}
   </div>
 
 {% endblock %}
@@ -86,6 +64,7 @@
 <script src="{% static 'js/custom.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
 <script src="{% static 'js/controllers/streaks.js' %}"></script>
+<script src="{% static 'vendor/angular-django-rest-resource.js' %}"></script>
 
 {% endblock %}
 

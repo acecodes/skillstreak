@@ -14,7 +14,7 @@
         {% block head %}{% endblock %} 
 		{% if not debug %}{% include "analytics.html" %}{% endif %}
 	</head>
-	<body>
+	<body {% block app %}{% endblock app %}>
 
 		{% block navbar %}
 		 <!-- Navbar -->
