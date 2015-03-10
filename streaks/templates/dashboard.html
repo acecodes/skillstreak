@@ -79,6 +79,16 @@
 
 {% endblock %}
 
+{% block scripts %}
+
+<script src="{% static 'vendor/angular.min.js' %}"></script>
+<script src="{% static 'vendor/angular-resource.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/controllers/streaks.js' %}"></script>
+
+{% endblock %}
+
 {% block auth-buttons %}
 
 <li><a href="/logout">Logout</a></li>
