@@ -40,15 +40,27 @@
 
   {# Streaks #}
   <div class="streaks" ng-controller="StreakCtrl as ctrl">
+  <form ng-submit="newStreak.$save()">
+      <fieldset>
+        <legend>Add an activity</legend>
+        <input ng-model="newStreak.user" />
+        <input ng-model="newStreak.activity" placeholder="Activity" />
+        <input ng-model="newStreak.start" placeholder="Start" />
+        <input ng-model="newStreak.current_streak" placeholder="Current streak" />
+        <button type="submit">Add</button>
+      </fieldset>
+  </form>
+
   {% verbatim %}
+  <h4>Current streaks: {{ streak.length }}</h4>
   <div ng-repeat="user_streak in streak">
   <hr>
-  <p>Activity: {{ user_streak.activity }}</p>
+  <h3>{{ user_streak.activity }}</h3>
   <p>Start: {{ user_streak.start }}</p>
   <p>Longest: {{ user_streak.current_streak }}</p>
   <p>Current: {{ user_streak.longest_streak }}</p>
   <p>Resets: {{ user_streak.resets }}</p>
-  <p>Last reset: {{ user_streak.last_rest }}</p>
+  <p>Last reset: {{ user_streak.last_reset | date }}</p>
   <p>Notes: {{ user_streak.notes }}</p>
   <hr>
   </div>
@@ -61,6 +73,8 @@
 
 <script src="{% static 'vendor/angular.min.js' %}"></script>
 <script src="{% static 'vendor/angular-resource.min.js' %}"></script>
+<script src="{% static 'vendor/angular-route.min.js' %}"></script>
+<script src="{% static 'vendor/angular-cookies.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
 <script src="{% static 'js/controllers/streaks.js' %}"></script>

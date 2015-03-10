@@ -12,5 +12,6 @@
       .controller('StreakCtrl', function ($scope, djResource) {
         var Streak = djResource('/api/streaks/:streakId', {streakId:'@id'});
         $scope.streak = Streak.query();
+        $scope.newStreak = new Streak();
       });
 })();
