@@ -9,11 +9,11 @@ from django.utils import timezone
 class Streak(models.Model):
     user = models.ForeignKey(User)
     activity = models.CharField(max_length=50)
-    start = models.DateTimeField()
+    start = models.DateField()
     current_streak = models.IntegerField(default=0)
     longest_streak = models.IntegerField(default=0)
     resets = models.IntegerField(default=0)
-    last_reset = models.DateTimeField(null=True)
+    last_reset = models.DateField(null=True)
     notes = models.TextField(null=True, blank=True)
 
     def __str__(self):

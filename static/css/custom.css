@@ -171,4 +171,7 @@ span.streak_box {
 #add_form {
   display: none; }
 
+input, input[type="date"] {
+  line-height: 25px; }
+
 /*# sourceMappingURL=custom.css.map */

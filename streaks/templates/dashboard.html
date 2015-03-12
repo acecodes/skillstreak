@@ -3,7 +3,7 @@
 {% load streak_tags %}
 {% load staticfiles %}
 
-{% block app %}ng-app="streakApp"{% endblock %}
+{% block app %}streakApp{% endblock %}
 
 {% block content %}
  {# Top block #}
@@ -15,7 +15,7 @@
   {% endif %}
   </h1>
   <h4 class="streak_headline">Please note: this is a prototype interface</h4>
-
+  
   <div id="add_form">
   {{ addform }}
   <button id="add_form_hide">Close</button>
@@ -43,9 +43,8 @@
   <form ng-submit="newStreak.$save()">
       <fieldset>
         <legend>Add an activity</legend>
-        <input ng-model="newStreak.user" />
         <input ng-model="newStreak.activity" placeholder="Activity" />
-        <input ng-model="newStreak.start" placeholder="Start" />
+        <input ng-model="newStreak.start" placeholder="Start" type="date"/>
         <input ng-model="newStreak.current_streak" placeholder="Current streak" />
         <button type="submit">Add</button>
       </fieldset>
