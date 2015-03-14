@@ -46,12 +46,23 @@
         <input ng-model="newStreak.activity" placeholder="Activity" />
         <input ng-model="newStreak.start" placeholder="Start" type="date"/>
         <input ng-model="newStreak.current_streak" placeholder="Current streak" />
+        <input ng-model="newStreak.notes" placeholder="Notes" />
         <button type="submit">Add</button>
       </fieldset>
   </form>
 
   {% verbatim %}
   <h4>Current streaks: {{ streak.length }}</h4>
+  
+  <div ng-show="newStreak.activity">
+  <hr>
+  <h3>{{ newStreak.activity }}</h3>
+  <h4>Current streak: {{ newStreak.current_streak }}</h4>
+  <p>Start: {{ newStreak.start | date }}</p>
+  <p>Notes: {{ newStreak.notes }}</p>
+  <hr>
+  </div>
+  
   <div ng-repeat="user_streak in streak">
   <hr>
   <h3>{{ user_streak.activity }}</h3>
