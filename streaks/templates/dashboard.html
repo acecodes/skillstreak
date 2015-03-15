@@ -3,7 +3,6 @@
 {% load streak_tags %}
 {% load staticfiles %}
 
-{% block app %}streakApp{% endblock %}
 
 {% block content %}
  {# Top block #}
@@ -15,11 +14,6 @@
   {% endif %}
   </h1>
   <h4 class="streak_headline">Please note: this is a prototype interface</h4>
-  
-  <div id="add_form">
-  {{ addform }}
-  <button id="add_form_hide">Close</button>
-  </div>
 
   {# Account options #}
   <div id="dash_options">
@@ -34,48 +28,7 @@
   <hr>
   </div>
 
-  <div class="messages" id="error">
-  <p>I'm sorry, there was an error.</p>
-  </div>
-
-  {# Streaks #}
-  <div class="streaks" ng-controller="StreakCtrl">
-  <form name="streakForm" novalidate ng-controller="FormCtrl">
-      <fieldset>
-        <legend>Add an activity</legend>
-        <input ng-model="newStreak.activity" placeholder="Activity" required />
-        <input ng-model="newStreak.start" placeholder="Start" type="date" required />
-        <input ng-model="newStreak.current_streak" placeholder="Current streak" />
-        <input ng-model="newStreak.notes" placeholder="Notes" />
-        <button type="submit" ng-click="addStreak(newStreak)">Add</button>
-      </fieldset>
-  </form>
-
-  {% verbatim %}
-  <h4>Current streaks: {{ streak.length }}</h4>
-  
-  <div ng-show="newStreak.activity">
-  <hr>
-  <h3>{{ newStreak.activity }}</h3>
-  <h4>Current streak: {{ newStreak.current_streak }}</h4>
-  <p>Start: {{ newStreak.start | date }}</p>
-  <p>Notes: {{ newStreak.notes }}</p>
-  <hr>
-  </div>
-  
-  <div ng-repeat="user_streak in streak">
-  <hr>
-  <h3>{{ user_streak.activity }}</h3>
-  <p>Start: {{ user_streak.start }}</p>
-  <p>Longest: {{ user_streak.current_streak }}</p>
-  <p>Current: {{ user_streak.longest_streak }}</p>
-  <p>Resets: {{ user_streak.resets }}</p>
-  <p>Last reset: {{ user_streak.last_reset | date }}</p>
-  <p>Notes: {{ user_streak.notes }}</p>
-  <hr>
-  </div>
-  {% endverbatim %}
-  </div>
+  <ui-view></ui-view>
 
 {% endblock %}
 
@@ -83,12 +36,11 @@
 
 <script src="{% static 'vendor/angular.min.js' %}"></script>
 <script src="{% static 'vendor/angular-resource.min.js' %}"></script>
-<script src="{% static 'vendor/angular-route.min.js' %}"></script>
+<script src="{% static 'vendor/angular-ui-router.min.js' %}"></script>
 <script src="{% static 'vendor/angular-cookies.min.js' %}"></script>
-<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'vendor/angular-django-rest-resource.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
 <script src="{% static 'js/controllers/streaks.js' %}"></script>
-<script src="{% static 'vendor/angular-django-rest-resource.js' %}"></script>
 
 {% endblock %}
 

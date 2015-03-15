@@ -14,7 +14,7 @@
         {% block head %}{% endblock %} 
 		{% if not debug %}{% include "analytics.html" %}{% endif %}
 	</head>
-	<body ng-app="{% block app %}{% endblock app %}">
+	<body ng-app="{% block app %}streakApp{% endblock %}">
 
 		{% block navbar %}
 		 <!-- Navbar -->

@@ -9,7 +9,7 @@
      * Controller of the frontendApp
      */
     angular.module('streakApp')
-        .controller('StreakCtrl', function($scope, djResource) {
+        .controller('StreakController', function($scope, djResource) {
 
             // Get streaks for user
             var Streak = djResource('/api/streaks/:streakId', {
@@ -32,7 +32,7 @@
 
 
         })
-        .controller('FormCtrl', function($scope, djResource) {
+        .controller('FormController', function($scope, djResource) {
             $scope.addStreak = function(activity) {
                 $scope.streak = angular.copy(activity);
                 activity.$save();

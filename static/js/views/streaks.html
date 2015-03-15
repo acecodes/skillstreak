@@ -1,0 +1,35 @@
+<div class="streaks">
+  <form name="streakForm" novalidate ng-controller="FormController as formCtrl">
+      <fieldset>
+        <legend>Add an activity</legend>
+        <input ng-model="newStreak.activity" placeholder="Activity" required />
+        <input ng-model="newStreak.start" placeholder="Start" type="date" required />
+        <input ng-model="newStreak.current_streak" placeholder="Current streak" />
+        <input ng-model="newStreak.notes" placeholder="Notes" />
+        <button type="submit" ng-click="addStreak(newStreak)">Add</button>
+      </fieldset>
+  </form>
+
+  <h4>Current streaks: {{ streak.length }}</h4>
+  
+  <div ng-show="newStreak.activity">
+  <hr>
+  <h3>{{ newStreak.activity }}</h3>
+  <h4>Current streak: {{ newStreak.current_streak }}</h4>
+  <p>Start: {{ newStreak.start | date }}</p>
+  <p>Notes: {{ newStreak.notes }}</p>
+  <hr>
+  </div>
+
+  <div ng-repeat="user_streak in streak">
+  <hr>
+  <h3>{{ user_streak.activity }}</h3>
+  <p>Start: {{ user_streak.start }}</p>
+  <p>Longest: {{ user_streak.current_streak }}</p>
+  <p>Current: {{ user_streak.longest_streak }}</p>
+  <p>Resets: {{ user_streak.resets }}</p>
+  <p>Last reset: {{ user_streak.last_reset | date }}</p>
+  <p>Notes: {{ user_streak.notes }}</p>
+  <hr>
+  </div>
+</div>
