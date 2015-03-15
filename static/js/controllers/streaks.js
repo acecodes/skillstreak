@@ -16,7 +16,7 @@
                 streakId: '@id'
             });
 
-            $scope.streak = Streak.query();
+            $scope.streaks = Streak.query();
 
             // Get user info and use it for making new streaks
             var User = djResource('/api/users/:userId', {
@@ -30,11 +30,17 @@
                 });
             });
 
+            $scope.deleteStreak = function(index) {
+                var indexOfActivity = $scope.streaks[index];
+                $scope.streaks.splice(index, 1);
+                indexOfActivity.$delete();
+            };
+
 
         })
         .controller('FormController', function($scope, djResource) {
             $scope.addStreak = function(activity) {
-                $scope.streak = angular.copy(activity);
+                $scope.streaks.push(activity);
                 activity.$save();
             };
         });
