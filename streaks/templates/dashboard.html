@@ -39,15 +39,15 @@
   </div>
 
   {# Streaks #}
-  <div class="streaks" ng-controller="StreakCtrl as ctrl">
-  <form ng-submit="newStreak.$save()">
+  <div class="streaks" ng-controller="StreakCtrl">
+  <form name="streakForm" novalidate ng-controller="FormCtrl">
       <fieldset>
         <legend>Add an activity</legend>
-        <input ng-model="newStreak.activity" placeholder="Activity" />
-        <input ng-model="newStreak.start" placeholder="Start" type="date"/>
+        <input ng-model="newStreak.activity" placeholder="Activity" required />
+        <input ng-model="newStreak.start" placeholder="Start" type="date" required />
         <input ng-model="newStreak.current_streak" placeholder="Current streak" />
         <input ng-model="newStreak.notes" placeholder="Notes" />
-        <button type="submit">Add</button>
+        <button type="submit" ng-click="addStreak(newStreak)">Add</button>
       </fieldset>
   </form>
 
