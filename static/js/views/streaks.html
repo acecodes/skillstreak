@@ -1,12 +1,12 @@
 <div class="streaks" ng-controller="FormController as formCtrl">
-  <form name="streakForm" ng-submit="addStreak(newStreak)" novalidate >
+  <form name="streakForm" novalidate >
       <fieldset>
         <legend>Add an activity</legend>
         <input ng-model="newStreak.activity" placeholder="Activity" required />
         <input ng-model="newStreak.start" placeholder="Start" type="date" required />
         <input ng-model="newStreak.current_streak" placeholder="Current streak" type="number" min="0" required />
         <input ng-model="newStreak.notes" placeholder="Notes" />
-        <button type="submit">Add</button>
+        <button type="submit" ng-click="addStreak(newStreak)">Add</button>
       </fieldset>
   </form>
 
