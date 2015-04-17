@@ -1,5 +1,5 @@
-<div class="streaks" ng-controller="FormController as formCtrl">
-  <form name="streakForm" novalidate >
+<div class="streaks" ng-controller="StreakController as streakCtrl">
+  <form name="streakForm" ng-controller="FormController as formCtrl" novalidate >
       <fieldset>
         <legend>Add an activity</legend>
         <input ng-model="newStreak.activity" placeholder="Activity" required />

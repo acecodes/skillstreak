@@ -1,4 +1,4 @@
-(function() {
+var Main = (function() {
     'use strict';
 
     /**
@@ -22,11 +22,11 @@
         }
     ]).
     config(function ($stateProvider) {
-        var views = "/static/js/views/";
-        $stateProvider.state("dashboard", {
-            url: "",
-            controller: "StreakController as streakCtrl",
-            templateUrl: views + "streaks.html"
+        var views = '/static/js/views/';
+        $stateProvider.state('dashboard', {
+            url: '',
+            controller: 'StreakController as streakCtrl',
+            templateUrl: views + 'streaks.html'
         });
     });
 })();

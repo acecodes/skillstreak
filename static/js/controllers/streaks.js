@@ -16,7 +16,6 @@
                 streakId: '@id'
             });
 
-            this.newStreak = {};
             $scope.streaks = Streak.query();
 
             // Get user info and use it for making new streaks
@@ -37,17 +36,16 @@
                 indexOfActivity.$delete();
             };
 
-
-        })
-        .controller('FormController', function($scope, djResource) {
-
-
             $scope.addStreak = function(activity) {
                 $scope.streaks.push(activity);
                 activity.$save();
-                this.newStreak = {};
+                $scope.newStreak = {};
 
             };
+
+
+        })
+        .controller('FormController', function($scope, djResource) {
 
         });
 })();
